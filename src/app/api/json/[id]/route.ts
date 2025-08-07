@@ -2,7 +2,10 @@ import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const authResult = (await auth()) as { userId?: string };
   const userId = authResult.userId;
 
@@ -19,7 +22,10 @@ export async function GET({ params }: { params: { id: string } }) {
   return NextResponse.json(json);
 }
 
-export async function PUT({ params, request }: { params: { id: string }; request: Request }) {
+export async function PUT(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const authResult = (await auth()) as { userId?: string };
   const userId = authResult.userId;
 
@@ -44,7 +50,10 @@ export async function PUT({ params, request }: { params: { id: string }; request
   return NextResponse.json(updated);
 }
 
-export async function DELETE({ params }: { params: { id: string } }) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const authResult = (await auth()) as { userId?: string };
   const userId = authResult.userId;
 
