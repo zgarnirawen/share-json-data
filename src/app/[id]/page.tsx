@@ -1,13 +1,6 @@
-// src/app/[id]/page.tsx
 import { JsonData } from '@prisma/client';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
-
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
 
 async function getData(id: string): Promise<JsonData | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/json/${id}`);
@@ -15,7 +8,7 @@ async function getData(id: string): Promise<JsonData | null> {
   return res.json();
 }
 
-export default async function SharedJsonPage({ params }: PageProps) {
+export default async function SharedJsonPage({ params }: { params: { id: string } }) {
   const jsonData = await getData(params.id);
 
   if (!jsonData) {
