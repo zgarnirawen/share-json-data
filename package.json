@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.29.0",
+    "@codemirror/lang-json": "^6.0.2",
     "@prisma/client": "^6.13.0",
     "@tailwindcss/postcss": "^4.1.11",
+    "@uiw/react-codemirror": "^4.24.2",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "lucide-react": "^0.537.0",
     "next": "^15.4.6",
     "react": "19.1.0",
