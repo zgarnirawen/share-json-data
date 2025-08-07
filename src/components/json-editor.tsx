@@ -31,17 +31,17 @@ export default function JsonEditor() {
   };
 
   return (
-    <Card className="max-w-5xl mx-auto my-8 shadow-lg border border-gray-200">
-      <CardHeader className="space-y-1 pb-4 border-b border-gray-200">
-        <CardTitle className="text-2xl font-bold">Saved JSON Data</CardTitle>
-        <CardDescription className="text-gray-600">
+    <Card className="json-editor-card">
+      <CardHeader className="json-editor-header">
+        <CardTitle className="json-editor-title">Saved JSON Data</CardTitle>
+        <CardDescription className="json-editor-description">
           View and share your saved JSON data.
         </CardDescription>
       </CardHeader>
-      <CardContent className="overflow-x-auto max-h-[500px]">
+      <CardContent className="json-editor-content">
         <JsonDataTable key={refreshKey} />
       </CardContent>
-      <CardFooter className="pt-4 border-t border-gray-200 flex justify-end">
+      <CardFooter className="json-editor-footer">
         <AddJsonDialog onSave={handleSave} />
       </CardFooter>
     </Card>

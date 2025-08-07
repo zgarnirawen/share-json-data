@@ -37,44 +37,35 @@ export default function JsonDataTable() {
 
   if (loading) {
     return (
-      <div className="text-center py-10 text-gray-500 font-medium">Loading...</div>
+      <div className="loading-text">Loading...</div>
     );
   }
 
   if (!jsonDataList.length) {
     return (
-      <div className='text-center text-gray-500 mt-6 italic'>
-        No data available, please add new entry!
-      </div>
+      <div className='no-data-text'>No data available, please add new entry!</div>
     );
   }
 
   return (
-    <Table className="min-w-full divide-y divide-gray-200">
-      <TableHeader className="bg-gray-50">
+    <Table className="json-table">
+      <TableHeader className="table-header">
         <TableRow>
-          <TableHead className="text-left px-4 py-2 font-semibold text-gray-700">
-            Name
-          </TableHead>
-          <TableHead className="text-left px-4 py-2 font-semibold text-gray-700">
-            Created At
-          </TableHead>
+          <TableHead className="table-head">Name</TableHead>
+          <TableHead className="table-head">Created At</TableHead>
           <TableHead className="sr-only">Share</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody className="bg-white divide-y divide-gray-200">
+      <TableBody className="table-body">
         {jsonDataList.map((data) => (
-          <TableRow
-            key={data.id}
-            className="hover:bg-gray-100 transition-colors"
-          >
-            <TableCell className="px-4 py-2">{data.name}</TableCell>
-            <TableCell className="px-4 py-2">
+          <TableRow key={data.id} className="table-row">
+            <TableCell className="table-cell">{data.name}</TableCell>
+            <TableCell className="table-cell">
               {format(new Date(data.createdAt), 'MMMM d, yyyy')}
             </TableCell>
-            <TableCell className="px-4 py-2 text-blue-600">
+            <TableCell className="table-cell share-cell">
               <Link href={`/${data.id}`} aria-label={`Share JSON data: ${data.name}`}>
-                <ShareIcon className='h-5 w-5 hover:text-blue-800 transition-colors' />
+                <ShareIcon className='share-icon' />
               </Link>
             </TableCell>
           </TableRow>

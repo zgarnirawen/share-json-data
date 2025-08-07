@@ -2,3 +2,920 @@
 @tailwind components;
 @tailwind utilities;
 
+/* globals.css */
+
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #f9fafb; /* light gray */
+  color: #111827; /* dark gray */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* body class */
+.app-body {
+  background-color: #f9fafb; /* light gray */
+  color: #111827; /* dark gray */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* container to center content and spacing */
+.container {
+  max-width: 768px; /* equivalent to max-w-4xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px; /* px-4 */
+  padding-right: 16px;
+  padding-top: 32px; /* py-8 */
+  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* space-y-8 */
+}
+/* Home page section */
+.home-section {
+  margin-top: 5rem; /* mt-20 = 80px approx */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem;
+  text-align: center;
+}
+
+/* Title */
+.home-title {
+  font-weight: 800; /* font-extrabold */
+  font-size: 2.25rem; /* text-4xl */
+  line-height: 1.2;
+  letter-spacing: -0.025em; /* tracking-tight */
+  margin: 0;
+}
+
+/* Responsive font size for large screens */
+@media (min-width: 640px) {
+  .home-title {
+    font-size: 3.75rem; /* sm:text-6xl */
+  }
+}
+
+/* Subtitle */
+.home-subtitle {
+  margin-top: 1rem; /* mt-4 */
+  max-width: 42rem; /* max-w-xl */
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.125rem; /* text-lg */
+  color: #6b7280; /* text-muted-foreground (gray-500) */
+  line-height: 1.5;
+}
+/* Navbar container fixed at top with border and blur */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .navbar {
+    padding-left: 1.5rem; /* sm:px-6 */
+    padding-right: 1.5rem;
+  }
+}
+
+/* Inner flex container */
+.navbar-container {
+  max-width: 768px; /* max-w-4xl */
+  margin-left: auto;
+  margin-right: auto;
+  height: 4rem; /* h-16 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left part: logo + nav */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* gap-6 */
+}
+
+/* Logo link */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* gap-2 */
+  color: #2563eb; /* text-blue-600 */
+  font-weight: 700; /* font-bold */
+  font-size: 1.125rem; /* text-lg */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.navbar-logo:hover {
+  color: #1d4ed8; /* text-blue-700 */
+}
+
+/* Logo icon size */
+.navbar-logo-icon {
+  height: 1.5rem; /* h-6 */
+  width: 1.5rem;  /* w-6 */
+}
+
+/* Navigation links */
+.navbar-link {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #4b5563; /* text-gray-600 */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.navbar-link:hover {
+  color: #111827; /* text-gray-900 */
+}
+
+/* Auth buttons container */
+.navbar-auth {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* gap-4 */
+}
+/* Base button style */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05); /* shadow-sm */
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  outline-offset: 2px;
+}
+
+/* Focus style */
+.btn:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* focus:ring-2 and ring-offset */
+}
+
+/* Primary variant */
+.btn-primary {
+  background-color: #2563eb; /* bg-blue-600 */
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #1d4ed8; /* bg-blue-700 */
+}
+
+/* Secondary variant */
+.btn-secondary {
+  background-color: #f3f4f6; /* bg-gray-100 */
+  color: #111827; /* text-gray-900 */
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #e5e7eb; /* bg-gray-200 */
+}
+
+/* Outline variant */
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  color: #374151; /* text-gray-700 */
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: #f3f4f6; /* bg-gray-100 */
+}
+
+/* Disabled state */
+.btn-disabled,
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+/* Card base styles */
+.card {
+  border-radius: 1rem; /* rounded-2xl */
+  border: 1px solid #e5e7eb; /* border-gray-200 */
+  background-color: #fff; /* bg-white */
+  color: #1f2937; /* text-gray-800 */
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05); /* shadow-sm */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Hover shadow */
+.card:hover {
+  box-shadow: 0 10px 15px rgb(0 0 0 / 0.1); /* hover:shadow-lg */
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background-color: #18181b; /* zinc-900 */
+    color: #fff;
+    border-color: #3f3f46; /* zinc-700 */
+  }
+  .card-header,
+  .card-footer {
+    border-color: #3f3f46; /* zinc-700 */
+  }
+  .card-description {
+    color: #9ca3af; /* gray-400 */
+  }
+}
+
+/* CardHeader styles */
+.card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* gap-2 */
+  padding: 1.5rem 1.5rem 1rem; /* px-6 py-4, approximated */
+  border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+}
+
+/* CardTitle styles */
+.card-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  line-height: 1.2;
+  letter-spacing: -0.025em; /* tracking-tight */
+  margin: 0;
+}
+
+/* CardDescription styles */
+.card-description {
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280; /* text-gray-500 */
+  margin: 0;
+}
+
+/* CardContent styles */
+.card-content {
+  padding: 1.5rem; /* p-6 */
+  font-size: 0.875rem; /* text-sm */
+}
+
+/* CardFooter styles */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem; /* px-6 py-4 */
+  border-top: 1px solid #e5e7eb; /* border-gray-200 */
+}
+/* Overlay: fixed fullscreen semi-transparent black */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Animations using Radix data-state attribute */
+  /* Use these if you keep Radix animations or define your own */
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+[data-state="open"] > .dialog-overlay {
+  animation-name: fade-in;
+}
+
+[data-state="closed"] > .dialog-overlay {
+  animation-name: fade-out;
+}
+
+/* Dialog Content: centered box with padding, shadow, rounded corners */
+.dialog-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  width: 100%;
+  max-width: 32rem; /* max-w-lg ~512px */
+  gap: 1rem;
+  background-color: var(--background, #fff);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+/* Radix animations for open/close state can be implemented or simplified */
+[data-state="open"] > .dialog-content {
+  animation-name: zoom-in-fade-in;
+}
+
+[data-state="closed"] > .dialog-content {
+  animation-name: zoom-out-fade-out;
+}
+
+/* Close button */
+.dialog-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 0.125rem;
+  opacity: 0.7;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  padding: 0.25rem;
+}
+
+.dialog-close:hover {
+  opacity: 1;
+}
+
+.dialog-close:focus-visible {
+  outline: 2px solid #3b82f6; /* blue-500 */
+  outline-offset: 2px;
+}
+
+/* Icon inside close */
+.dialog-close-icon {
+  height: 1rem; /* 16px */
+  width: 1rem;
+  color: currentColor;
+}
+
+/* Header - flex column with spacing, center on mobile, left on larger screens */
+.dialog-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .dialog-header {
+    text-align: left;
+  }
+}
+
+/* Footer - flex reverse column on mobile, row with right aligned on desktop */
+.dialog-footer {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .dialog-footer {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}
+
+/* Title */
+.dialog-title {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600; /* font-semibold */
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+/* Description */
+.dialog-description {
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280; /* muted gray */
+  margin-top: 0.25rem;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Keyframe animations */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes zoom-in-fade-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes zoom-out-fade-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+/* Base input style */
+.input {
+  display: flex;
+  height: 2.25rem; /* 36px (h-9) */
+  width: 100%;
+  border-radius: 0.375rem; /* rounded-md */
+  border: 1px solid var(--input-border, #d1d5db); /* default border color */
+  background-color: transparent;
+  padding: 0.25rem 0.75rem; /* py-1 px-3 */
+  font-size: 0.875rem; /* text-sm */
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05); /* shadow-sm */
+  color: var(--input-foreground, #111827); /* text color */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Placeholder color */
+.input::placeholder {
+  color: #6b7280; /* muted-foreground gray */
+}
+
+/* Focus styles */
+.input:focus-visible {
+  outline: none;
+  border-color: var(--ring-color, #3b82f6); /* blue ring */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* Disabled styles */
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* File input specific styles */
+.input[type="file"] {
+  border: none;
+  background-color: transparent;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: var(--input-foreground, #111827);
+  padding: 0;
+}
+
+/* Remove file input border (override default browser) */
+.input[type="file"]::-webkit-file-upload-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: 500;
+  color: inherit;
+  cursor: pointer;
+}
+/* Base label style */
+.label {
+  font-weight: 500; /* font-medium */
+  line-height: 1;   /* leading-none */
+  cursor: pointer;
+}
+
+/* Disabled peer - use the peer selector if needed */
+/* For example, if input has 'peer' class, you can style the label accordingly */
+/* But CSS doesn't support "peer-disabled" natively without parent structure, so adapt as needed */
+
+/* Variants */
+.label-default {
+  color: #111827; /* text-gray-900 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .label-default {
+    color: #f9fafb; /* dark:text-gray-100 */
+  }
+}
+
+.label-secondary {
+  color: #4b5563; /* text-gray-600 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .label-secondary {
+    color: #9ca3af; /* dark:text-gray-400 */
+  }
+}
+
+.label-error {
+  color: #dc2626; /* text-red-600 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .label-error {
+    color: #f87171; /* dark:text-red-500 */
+  }
+}
+
+/* Sizes */
+.label-size-sm {
+  font-size: 0.75rem; /* text-xs */
+}
+
+.label-size-md {
+  font-size: 0.875rem; /* text-sm */
+}
+
+.label-size-lg {
+  font-size: 1rem; /* text-base */
+}
+
+/* Disabled style */
+/* If you want to simulate peer-disabled effect, you need to handle disabled state via JS or HTML structure */
+/* Example: when input is disabled, you add disabled attribute on label or use aria-disabled */
+/* For now, just define disabled styles that can be added with a class 'label-disabled' */
+
+.label.label-disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+/* Wrapper for scroll */
+.table-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  font-size: 0.875rem; /* text-sm */
+  caption-side: bottom;
+  border-collapse: collapse;
+}
+
+/* Table header */
+.table-header tr {
+  border-bottom: 1px solid #e5e7eb; /* light gray */
+}
+
+/* Table body: remove border on last row */
+.table-body tr:last-child {
+  border-bottom: none;
+}
+
+/* Table footer */
+.table-footer {
+  border-top: 1px solid #e5e7eb;
+  background-color: rgba(229, 231, 235, 0.5); /* bg-muted/50 */
+  font-weight: 500;
+}
+
+.table-footer tr:last-child {
+  border-bottom: 0;
+}
+
+/* Table row */
+.table-row {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+  cursor: default;
+}
+
+.table-row:hover {
+  background-color: rgba(229, 231, 235, 0.5);
+}
+
+/* Add support for [data-state="selected"] on row */
+.table-row[data-state="selected"] {
+  background-color: rgba(229, 231, 235, 0.5);
+}
+
+/* Table head cell */
+.table-head {
+  height: 2.5rem; /* h-10 */
+  padding-left: 0.5rem;  /* px-2 */
+  padding-right: 0.5rem; /* keep padding for normal */
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 500;
+  color: #6b7280; /* muted-foreground */
+  position: relative; /* for ::after or children if needed */
+}
+
+/* If th contains role=checkbox, remove right padding */
+.table-head:has([role="checkbox"]) {
+  padding-right: 0;
+}
+
+/* Align checkbox inside header vertically */
+.table-head > [role="checkbox"] {
+  transform: translateY(2px);
+}
+
+/* Table cell */
+.table-cell {
+  padding: 0.5rem; /* p-2 */
+  vertical-align: middle;
+}
+
+/* If td contains role=checkbox, remove right padding */
+.table-cell:has([role="checkbox"]) {
+  padding-right: 0;
+}
+
+/* Align checkbox inside cell vertically */
+.table-cell > [role="checkbox"] {
+  transform: translateY(2px);
+}
+
+/* Table caption */
+.table-caption {
+  margin-top: 1rem; /* mt-4 */
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280; /* muted-foreground */
+}
+/* Dialog Content */
+.dialog-content {
+  max-width: 48rem; /* max-w-4xl ~ 64rem is 1024px, 48rem = 768px */
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 1.5rem; /* p-6 */
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dialog Title */
+.dialog-title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 600;  /* font-semibold */
+  color: #111827;    /* gray-900 */
+  margin-bottom: 0.5rem;
+}
+
+/* Dialog Description */
+.dialog-description {
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280;      /* gray-500 */
+  margin-bottom: 1.5rem;
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  gap: 1.5rem; /* gap-6 */
+}
+
+/* Form Group */
+.form-group {
+  display: grid;
+  gap: 0.5rem; /* gap-2 */
+}
+
+/* Label */
+.label {
+  font-weight: 500; /* font-medium */
+  color: #374151;   /* gray-700 */
+}
+
+/* Input */
+.input-standard {
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.375rem;    /* rounded-md */
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;        /* text-sm */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-standard:focus {
+  outline: none;
+  border-color: #3b82f6;      /* blue-500 */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* CodeMirror Editor */
+.code-editor {
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Dialog Footer */
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem; /* gap-3 */
+  margin-top: 1rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #2563eb; /* blue-600 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8; /* blue-700 */
+}
+
+.btn-secondary {
+  background-color: #e5e7eb; /* gray-200 */
+  color: #374151;            /* gray-700 */
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #d1d5db; /* gray-300 */
+}
+
+/* Disabled button */
+.btn-disabled {
+  background-color: #93c5fd; /* blue-300 */
+  color: white;
+  cursor: not-allowed;
+  pointer-events: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-weight: 600;
+}
+/* Loading text */
+.loading-text {
+  text-align: center;
+  padding: 2.5rem 0; /* py-10 = 2.5rem top and bottom */
+  color: #6b7280;   /* gray-500 */
+  font-weight: 500; /* font-medium */
+}
+
+/* No data message */
+.no-data-text {
+  text-align: center;
+  color: #6b7280;     /* gray-500 */
+  margin-top: 1.5rem; /* mt-6 */
+  font-style: italic;
+}
+
+/* Table main */
+.json-table {
+  min-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-bottom: 1px solid #e5e7eb; /* divide-gray-200 */
+}
+
+/* Table header background */
+.table-header {
+  background-color: #f9fafb; /* gray-50 */
+}
+
+/* Table head cells */
+.table-head {
+  text-align: left;
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  font-weight: 600;
+  color: #374151; /* gray-700 */
+}
+
+/* Hide screen readers only */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Table body */
+.table-body {
+  background-color: white;
+  border-top: 1px solid #e5e7eb; /* divide-gray-200 */
+}
+
+/* Table rows */
+.table-row {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.table-row:hover {
+  background-color: #f3f4f6; /* gray-100 */
+}
+
+/* Table cells */
+.table-cell {
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+}
+
+/* Share icon cell */
+.share-cell {
+  color: #2563eb; /* blue-600 */
+}
+
+.share-cell a:hover {
+  color: #1e40af; /* blue-800 */
+  transition: color 0.2s ease;
+}
+
+/* Share icon size */
+.share-icon {
+  height: 1.25rem; /* h-5 */
+  width: 1.25rem;  /* w-5 */
+  vertical-align: middle;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.json-editor-card {
+  max-width: 80rem; /* max-w-5xl ~ 80rem = 1280px */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;  /* my-8 = 2rem top & bottom */
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb; /* border-gray-200 */
+  border-radius: 0.5rem; /* assuming from Card base */
+  background-color: white;
+}
+
+.json-editor-header {
+  padding-bottom: 1rem; /* pb-4 */
+  border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+  margin-bottom: 0.25rem; /* space-y-1 roughly */
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.json-editor-title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700;  /* font-bold */
+}
+
+.json-editor-description {
+  color: #4b5563; /* gray-600 */
+  font-weight: 400;
+}
+
+.json-editor-content {
+  overflow-x: auto;
+  max-height: 500px;
+}
+
+.json-editor-footer {
+  padding-top: 1rem; /* pt-4 */
+  border-top: 1px solid #e5e7eb; /* border-gray-200 */
+  display: flex;
+  justify-content: flex-end;
+}

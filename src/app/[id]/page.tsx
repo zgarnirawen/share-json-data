@@ -1,15 +1,15 @@
 import { JsonData } from '@prisma/client';
-import CodeMirror from '@uiw/react-codemirror';
-import { json } from '@codemirror/lang-json';
+import prisma from '@/lib/db';
+import JsonViewer from '@/components/JsonViewer';
 
-async function getData(id: string): Promise<JsonData | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/json/${id}`);
-  if (!res.ok) return null;
-  return res.json();
-}
+export default async function SharedJsonPage({ params }: { params: Promise<{ id: string }> }) {
+  // Await params because Next.js now wraps it in a promise
+  const { id } = await params;
 
-export default async function SharedJsonPage({ params }: { params: { id: string } }) {
-  const jsonData = await getData(params.id);
+  // Fetch JSON data from your database using Prisma
+  const jsonData: JsonData | null = await prisma.jsonData.findUnique({
+    where: { id },
+  });
 
   if (!jsonData) {
     return <div>Data not found</div>;
@@ -18,13 +18,8 @@ export default async function SharedJsonPage({ params }: { params: { id: string 
   return (
     <div className="mt-8 space-y-4">
       <h1 className="text-2xl underline font-bold">{jsonData.name}</h1>
-      <CodeMirror
-        value={jsonData.content}
-        height="400px"
-        extensions={[json()]}
-        editable={false}
-        className="border shadow-sm"
-      />
+      {/* Use the client component here */}
+      <JsonViewer content={jsonData.content} />
     </div>
   );
 }

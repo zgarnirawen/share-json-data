@@ -1,7 +1,6 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import './globals.css';
 import Navbar from '@/components/navbar';
 import { ClerkProvider } from '@clerk/nextjs';
 
@@ -17,9 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang='en'>
-        <body className="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen">
-          <main className="max-w-4xl mx-auto px-4 py-8 space-y-8">
+      <html lang="en">
+        <body className="app-body">
+          <main className="container">
             <Navbar />
             {children}
           </main>

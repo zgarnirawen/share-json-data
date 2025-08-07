@@ -36,56 +36,48 @@ export default function AddJsonDialog({ onSave }: AddJsonDialogProps) {
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white">Add JSON Data</Button>
+        <Button className="btn-primary">Add JSON Data</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-4xl rounded-lg p-6 bg-white shadow-lg">
+      <DialogContent className="dialog-content">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-semibold text-gray-900">JSON Editor</DialogTitle>
-          <DialogDescription className="text-sm text-gray-500 mb-6">
+          <DialogTitle className="dialog-title">JSON Editor</DialogTitle>
+          <DialogDescription className="dialog-description">
             Edit and save your JSON data.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-6">
-          <div className="grid gap-2">
-            <Label className="text-gray-700 font-medium">JSON Name</Label>
+        <div className="form-grid">
+          <div className="form-group">
+            <Label className="label">JSON Name</Label>
             <Input
               value={jsonName}
               placeholder="Enter JSON Name"
-              className="rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="input-standard"
               onChange={(e) => setJsonName(e.target.value)}
             />
           </div>
 
-          <div className="grid gap-2">
-            <Label className="text-gray-700 font-medium">JSON Data</Label>
+          <div className="form-group">
+            <Label className="label">JSON Data</Label>
             <CodeMirror
               value={jsonData}
               height="400px"
               extensions={[json()]}
               onChange={(value) => setJsonData(value)}
-              className="border rounded-md shadow-sm"
+              className="code-editor"
             />
           </div>
 
-          <DialogFooter className="flex justify-end gap-3">
+          <DialogFooter className="dialog-footer">
             <DialogClose asChild>
-              <Button
-                type="button"
-                variant="secondary"
-                className="bg-gray-200 text-gray-700 hover:bg-gray-300"
-              >
+              <Button type="button" variant="secondary" className="btn-secondary">
                 Close
               </Button>
             </DialogClose>
             <Button
               disabled={!jsonName || !jsonData}
               onClick={handleSave}
-              className={`${
-                !jsonName || !jsonData
-                  ? 'bg-blue-300 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700'
-              } text-white`}
+              className={(!jsonName || !jsonData) ? 'btn-disabled' : 'btn-primary'}
             >
               Save
             </Button>

@@ -1,50 +1,30 @@
 "use client"
 
-import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import * as LabelPrimitive from "@radix-ui/react-label";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
+export interface LabelProps extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
+  variant?: "default" | "secondary" | "error";
+  size?: "sm" | "md" | "lg";
+}
 
-// Définition des variantes de style pour le label
-const labelVariants = cva(
-  "font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-  {
-    variants: {
-      variant: {
-        default: "text-gray-900 dark:text-gray-100",
-        secondary: "text-gray-600 dark:text-gray-400",
-        error: "text-red-600 dark:text-red-500",
-      },
-      size: {
-        sm: "text-xs",
-        md: "text-sm",
-        lg: "text-base",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "md",
-    },
-  }
-)
-
-export interface LabelProps
-  extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>,
-    VariantProps<typeof labelVariants> {}
-
-// Composant Label avec prise en charge des refs et des variantes
 const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   LabelProps
->(({ className, variant, size, ...props }, ref) => (
-  <LabelPrimitive.Root
-    ref={ref}
-    className={cn(labelVariants({ variant, size }), className)}
-    {...props}
-  />
-))
+>(({ className, variant = "default", size = "md", ...props }, ref) => {
+  // Compose semantic class names based on variant and size
+  const variantClass = `label-${variant}`;
+  const sizeClass = `label-size-${size}`;
+  return (
+    <LabelPrimitive.Root
+      ref={ref}
+      className={cn("label", variantClass, sizeClass, className)}
+      {...props}
+    />
+  );
+});
 
-Label.displayName = LabelPrimitive.Root.displayName
+Label.displayName = LabelPrimitive.Root.displayName;
 
-export { Label }
+export { Label };
