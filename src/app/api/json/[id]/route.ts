@@ -3,12 +3,10 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: { id: string } }
 ) {
-  const authResult = (await auth()) as { userId?: string };
-  const userId = authResult.userId;
-
+  const { userId } = await auth();
   if (!userId) return new NextResponse('Unauthorized', { status: 401 });
 
   const json = await prisma.jsonData.findUnique({
@@ -26,13 +24,10 @@ export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const authResult = (await auth()) as { userId?: string };
-  const userId = authResult.userId;
-
+  const { userId } = await auth();
   if (!userId) return new NextResponse('Unauthorized', { status: 401 });
 
-  const body = await request.json();
-  const { name, content } = body;
+  const { name, content } = await request.json();
 
   const existing = await prisma.jsonData.findUnique({
     where: { id: params.id },
@@ -51,12 +46,10 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: Request,
+  _request: Request,
   { params }: { params: { id: string } }
 ) {
-  const authResult = (await auth()) as { userId?: string };
-  const userId = authResult.userId;
-
+  const { userId } = await auth();
   if (!userId) return new NextResponse('Unauthorized', { status: 401 });
 
   const existing = await prisma.jsonData.findUnique({
