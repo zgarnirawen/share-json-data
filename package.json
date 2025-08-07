@@ -30,6 +30,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/webpack": "^5.28.5",
+    "eslint": "^9.32.0",
     "typescript": "^5.0.0"
   }
 }
