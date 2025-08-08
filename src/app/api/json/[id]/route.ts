@@ -4,13 +4,13 @@ import prisma from '@/lib/db';
 
 export async function GET(
   request: Request,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   const { userId } = await auth();
   if (!userId) return new NextResponse('Unauthorized', { status: 401 });
 
   const json = await prisma.jsonData.findUnique({
-    where: { id: context.params.id },
+    where: { id: params.id },
   });
 
   if (!json || json.userId !== userId) {
@@ -22,7 +22,7 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   const { userId } = await auth();
   if (!userId) return new NextResponse('Unauthorized', { status: 401 });
@@ -30,7 +30,7 @@ export async function PUT(
   const { name, content } = await request.json();
 
   const existing = await prisma.jsonData.findUnique({
-    where: { id: context.params.id },
+    where: { id: params.id },
   });
 
   if (!existing || existing.userId !== userId) {
@@ -38,7 +38,7 @@ export async function PUT(
   }
 
   const updated = await prisma.jsonData.update({
-    where: { id: context.params.id },
+    where: { id: params.id },
     data: { name, content },
   });
 
@@ -47,13 +47,13 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   const { userId } = await auth();
   if (!userId) return new NextResponse('Unauthorized', { status: 401 });
 
   const existing = await prisma.jsonData.findUnique({
-    where: { id: context.params.id },
+    where: { id: params.id },
   });
 
   if (!existing || existing.userId !== userId) {
@@ -61,7 +61,7 @@ export async function DELETE(
   }
 
   const deleted = await prisma.jsonData.delete({
-    where: { id: context.params.id },
+    where: { id: params.id },
   });
 
   return NextResponse.json(deleted);
