@@ -1,8 +1,14 @@
 // src/middleware.ts
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { authMiddleware } from "@clerk/nextjs";
 
-export default clerkMiddleware;
+export default authMiddleware({
+  // Routes that can be accessed while signed out
+  publicRoutes: ["/", "/api/json(.*)"],
+  // Routes that can always be accessed, and have
+  // no authentication information
+  ignoredRoutes: ["/api/json(.*)"]
+});
 
 export const config = {
-  matcher: "/:path*",
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 };
