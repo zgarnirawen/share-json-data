@@ -1,68 +1,26 @@
-import { auth } from '@clerk/nextjs/server';
-import { NextResponse } from 'next/server';
-import prisma from '@/lib/db';
+import prisma from "@/lib/db";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const { userId } = await auth();
-  if (!userId) return new NextResponse('Unauthorized', { status: 401 });
-
-  const json = await prisma.jsonData.findUnique({
-    where: { id: params.id },
-  });
-
-  if (!json || json.userId !== userId) {
-    return new NextResponse('Not found', { status: 404 });
+export async function GET(request: NextRequest, { params }: {
+  params: {
+    id: string
   }
+}) {
+  const { id } = params;
 
-  return NextResponse.json(json);
-}
-
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const { userId } = await auth();
-  if (!userId) return new NextResponse('Unauthorized', { status: 401 });
-
-  const { name, content } = await request.json();
-
-  const existing = await prisma.jsonData.findUnique({
-    where: { id: params.id },
-  });
-
-  if (!existing || existing.userId !== userId) {
-    return new NextResponse('Not found', { status: 404 });
+  try {
+    const json = await prisma.jsonData.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        content: true,
+        createdAt: true
+      }
+    });
+    return NextResponse.json(json);
+  } catch(error) {
+    console.error('Error fetching JSON data:', error);
+    return NextResponse.json({ error: 'Error fetching JSON data'}, { status: 500 })
   }
-
-  const updated = await prisma.jsonData.update({
-    where: { id: params.id },
-    data: { name, content },
-  });
-
-  return NextResponse.json(updated);
-}
-
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const { userId } = await auth();
-  if (!userId) return new NextResponse('Unauthorized', { status: 401 });
-
-  const existing = await prisma.jsonData.findUnique({
-    where: { id: params.id },
-  });
-
-  if (!existing || existing.userId !== userId) {
-    return new NextResponse('Not found', { status: 404 });
-  }
-
-  const deleted = await prisma.jsonData.delete({
-    where: { id: params.id },
-  });
-
-  return NextResponse.json(deleted);
 }
