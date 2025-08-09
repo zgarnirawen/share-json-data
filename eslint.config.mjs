@@ -4,6 +4,10 @@ const nextConfig = {
     // Temporarily disable ESLint during builds
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    // Optional: also ignore TypeScript errors during builds if needed
+    // ignoreBuildErrors: true,
+  },
 }
 
 module.exports = nextConfig
