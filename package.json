@@ -23,7 +23,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
-    "lucide-react": "^0.300.0",
+    "lucide-react": "^0.263.1",
     "mitt": "^3.0.1",
     "mongoose": "^8.2.4",
     "next": "^15.4.6",
